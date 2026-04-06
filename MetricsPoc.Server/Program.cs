@@ -6,7 +6,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add service defaults & Aspire client integrations.
 builder.AddServiceDefaults();
-builder.AddNpgsqlDbContext<TodoDbContext>("todosdb");
+builder.AddNpgsqlDbContext<TodoDbContext>("todosdb", settings =>
+{
+    settings.DisableMetrics = true; // Disable metrics because we want to enable it from the AppHost
+});
 
 // Add services to the container.
 builder.Services.AddProblemDetails();

@@ -7,6 +7,7 @@ var todosdb = postgres.AddDatabase("todosdb");
 var server = builder.AddProject<Projects.MetricsPoc_Server>("server")
     .WithReference(todosdb)
     .WaitFor(todosdb)
+    .WithEnvironment("Metrics__EnabledMetrics__Npgsql", "true")
     .WithHttpHealthCheck("/health")
     .WithExternalHttpEndpoints();
 
